@@ -21,7 +21,6 @@ class AFN:
             return False
 
     def createCopy(self,dictionaryOriginal,lastNode):
-        #print(interval)
         newDict = {}
         for i in dictionaryOriginal:
             firstKey = i
@@ -53,8 +52,6 @@ class AFN:
             self.dict.update({self.final : {label : [final,self.initial]}}) #accept state to Y
         else:
             x = self.dict[self.final]
-            #ESTO VA A TRONAR CUANDO NO SEAN LETRAS SI NO QUE PALABRAS O NUMEROS
-            # PARA SOLUCIONAR UTILIZAR LIST()
             key = x.keys()
             value = x.values()
             for i in key:
