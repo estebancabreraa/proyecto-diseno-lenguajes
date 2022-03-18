@@ -72,29 +72,26 @@ def computableExpresion(expresion):
     if i == 0:
       nuevaexpresion = nuevaexpresion + expresion[i]
     else:
-      #print("toca ",expresion[i]," anterior ",expresion[i-1])
       if validChar(expresion[i-1]) and validChar(expresion[i]):
-        #print("se agrega _",expresion[i])
         nuevaexpresion = nuevaexpresion + "_" + expresion[i]
       elif validChar(expresion[i-1]) and expresion[i] == "(":
-        #print("se agrega _",expresion[i])
+       
         nuevaexpresion = nuevaexpresion + "_" + expresion[i]
       elif validChar(expresion[i]) and expresion[i-1] == ")":
-        #print("se agrega _",expresion[i])
+       
         nuevaexpresion = nuevaexpresion + "_" + expresion[i]
       elif expresion[i-1] == "*" and validChar(expresion[i]):
-        #print("se agrega _",expresion[i])
+       
         nuevaexpresion = nuevaexpresion + "_" + expresion[i]
       elif expresion[i-1] == "*" and expresion[i] == "(":
-        #print("se agrega _",expresion[i])
+
         nuevaexpresion = nuevaexpresion + "_" + expresion[i]
       elif expresion[i-1] == ")" and expresion[i] == "(":
-        #print("se agrega _",expresion[i])
+       
         nuevaexpresion = nuevaexpresion + "_" + expresion[i]
       elif expresion[i] == "?":
         nuevaexpresion = nuevaexpresion + "?"
       else:
-        #print("se agrega ",expresion[i])
         nuevaexpresion = nuevaexpresion + expresion[i]
   return nuevaexpresion     
     
@@ -121,8 +118,6 @@ def infixaPostfix(exp):
   output = []
   operators = []
   for i in exp:
-    #print(i)
-    #print(operators)
     if validChar(i):
       output.append(i)
     else:
@@ -142,9 +137,6 @@ def infixaPostfix(exp):
           else: 
             output.append(operators.pop())
       else:
-        #print(operators)
-        #print(output)
-        #print(i)
         return "Error"     
   while( (not isEmpty(operators))):
     output.append(operators.pop())
@@ -156,10 +148,8 @@ def expresionParaArbol(expresion):
     if i == 0:
       nuevaexpresion = nuevaexpresion + expresion[i]
     else:
-      #print("toca ",expresion[i]," anterior ",expresion[i-1])
       if expresion[i] == "?":
         nuevaexpresion = nuevaexpresion + "|ε"
       else:
-        #print("se agrega ",expresion[i])
         nuevaexpresion = nuevaexpresion + expresion[i]
   return nuevaexpresion

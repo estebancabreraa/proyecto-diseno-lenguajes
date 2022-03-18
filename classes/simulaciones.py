@@ -22,7 +22,6 @@ def eCerradura(dictionary, finalNode, node):
         return falseStates
 
 def move(dictionary,finalNode,states,label):
-    #print("move con los estados ",states," y la etiqueta ", label)
     result=[]
     for i in states:
         if not i == finalNode:
@@ -36,7 +35,7 @@ def move(dictionary,finalNode,states,label):
                 else:
                     result.append(values)
     temp = []
-    #print("e-cerradura con los estados: ",result)
+
     for i in result:
         temp.append(eCerradura(dictionary,finalNode,i))
     for i in temp:
@@ -47,17 +46,15 @@ def move(dictionary,finalNode,states,label):
             pass
         else:
             result.append(i)
-    #print("Los estados resultantes fueron: ", result)
     return list(set(result))
 
-def simulationNFA(dictionary, initial, final, expresion, subsets,alphabet):
+def simulationAFN(dictionary, initial, final, expresion, subsets,alphabet):
     S = []
-    S.append(sorted(eCerradura(dictionary,final,initial)))
-    #print("Se parte desde el estado ",S[0],"\nla expresion es: ",expresion)
+    S.append(sorted(eCerradura(dictionary, final, initial)))
     cont = 0
     for i in expresion:
         if i in alphabet:
-            S.append(sorted(move(dictionary,final,S[cont],i)))
+            S.append(sorted(move(dictionary, final, S[cont], i)))
             cont = cont +1 
         else: 
             return "No"
@@ -66,7 +63,7 @@ def simulationNFA(dictionary, initial, final, expresion, subsets,alphabet):
     else:
         return "No"
 
-def simulationFDA(subsetsTrans, states, expresion, alphabet):
+def simulationAFD(subsetsTrans, states, expresion, alphabet):
     S = []
     currentState = states[0]
     for i in expresion:
@@ -78,11 +75,9 @@ def simulationFDA(subsetsTrans, states, expresion, alphabet):
                     S.append(j[1])
                     currentState = j[1]
             if not flag:
-                #print("No se llego a ningun subconjunto con estado de aceptación")
                 return "No"
         else:
             return "No"
-    #print(subsetsTrans)
     if states[len(states)-1] in S:
         return "Sí"
     else:

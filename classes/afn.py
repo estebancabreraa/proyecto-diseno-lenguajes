@@ -1,6 +1,7 @@
+from classes.char_validation import char_validator_thompson
 class AFN:
 
-    def __init__(self,initial, final, label):
+    def __init__(self, initial, final, label):
         self.initial = initial
         self.final = final
         self.label = label

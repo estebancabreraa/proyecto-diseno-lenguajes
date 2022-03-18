@@ -1,71 +1,56 @@
 from classes.afn import *
-
+from classes.char_validation import char_validator_thompson
 epsilon = 'ε'
 
-def validChar(char):
-    if char in ["*","?","|","_","+"]:
-        return False
 
-    elif char == "ε":
-        return True
-
-    elif char.isalpha():
-        return True
-
-    elif char.isnumeric():
-        return True  
-
-    else: 
-        return False
-
-def ThompsonAlgorithm(postfixexp):
-    nfaStack = []
+def ThompsonAlgorithm(processed_expresion):
+    afn_struct = []
     cont = 1
     
-    for i in postfixexp:
-        if (validChar(i)):
-            nfaStack.append(AFN(cont, cont+1,i))
+    for i in processed_expresion:
+        if (char_validator_thompson(i)):
+            afn_struct.append(AFN(cont, cont+1,i))
             cont = cont + 2
 
         if i == "|":
-            temp = AFN(cont, cont+1, epsilon)
-            second = nfaStack.pop()
-            first = nfaStack.pop()
-            temp.unionOperator(first,second)
-            nfaStack.append(temp)
+            temp_afn = AFN(cont, cont + 1, epsilon)
+            item2 = afn_struct.pop()
+            item1 = afn_struct.pop()
+            temp_afn.unionOperator(item1,item2)
+            afn_struct.append(temp_afn)
             cont = cont + 2
 
         if i == "_":
-            second = nfaStack.pop()
-            first = nfaStack.pop()
-            first.concat(second)
-            nfaStack.append(first)
+            item2 = afn_struct.pop()
+            item1 = afn_struct.pop()
+            item1.concat(item2)
+            afn_struct.append(item1)
         
         if i == "?":
-            second = AFN(cont, cont+1, epsilon)
+            item2 = AFN(cont, cont+1, epsilon)
             cont = cont + 2
-            first = nfaStack.pop()
-            temp = AFN(cont, cont+1, epsilon)
-            temp.unionOperator(first,second)
-            nfaStack.append(temp)
+            item1 = afn_struct.pop()
+            temp_afn = AFN(cont, cont+1, epsilon)
+            temp_afn.unionOperator(item1,item2)
+            afn_struct.append(temp_afn)
             cont = cont + 2
             
         if i == "*":
-            temp = nfaStack.pop()
-            temp.closure(cont,cont+1,epsilon)
-            nfaStack.append(temp)
+            temp_afn = afn_struct.pop()
+            temp_afn.closure(cont,cont+1,epsilon)
+            afn_struct.append(temp_afn)
             cont = cont + 2
         
         if i == "+":       
-            first = nfaStack.pop()
-            finalNode = first.getFinal()
-            firstNode = first.getInitial()
-            second = AFN((finalNode+finalNode)-(finalNode-firstNode), finalNode+finalNode, first.getLabel())
-            second.createCopy(first.getDict(),finalNode)
-            cont = second.getFinal() + 1 
-            second.closure(cont,cont+1, epsilon)
+            item1 = afn_struct.pop()
+            finalNode = item1.getFinal()
+            item1Node = item1.getInitial()
+            item2 = AFN((finalNode+finalNode)-(finalNode-item1Node), finalNode+finalNode, item1.getLabel())
+            item2.createCopy(item1.getDict(),finalNode)
+            cont = item2.getFinal() + 1 
+            item2.closure(cont,cont+1, epsilon)
             cont = cont + 2
-            first.concat(second)
-            nfaStack.append(first)
+            item1.concat(item2)
+            afn_struct.append(item1)
 
-    return nfaStack.pop()
+    return afn_struct.pop()

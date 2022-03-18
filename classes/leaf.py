@@ -1,18 +1,8 @@
-def validChar(char):
-  if char.isalpha():
-    return True
-  elif char.isnumeric():
-    return True
-  elif char == "ε":
-    return True
-  elif char == "#":
-    return True
-  else: 
-    return False
+from classes.char_validation import char_validator_leaf
 
 class leaf:
   def __init__(self,character,pos = None,c1 = None,c2=None):
-    if validChar(character):
+    if char_validator_leaf(character):
       if character =="ε":
         self.typeLeaf = "e"
         self.primerapos = []

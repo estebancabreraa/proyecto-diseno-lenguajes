@@ -35,7 +35,7 @@ def move(dictionary,finalNode,states,label):
                 else:
                     result.append(values)
     temp = []
-    #print("e-cerradura de: ",result)
+
     for i in result:
         temp.append(eCerradura(dictionary,finalNode,i))
     for i in temp:
@@ -46,18 +46,18 @@ def move(dictionary,finalNode,states,label):
             pass
         else:
             result.append(i)
-    #print("Resultado ",result)
+
     return list(set(result))
   
 def subsetsBuilder(alphabet,states,dictionary,initial,final):
 
     Dstates = []
     Dstates.append(sorted(eCerradura(dictionary,final,[initial])))
-    #print ("S0: ",Dstates[0])
+
 
     for i in Dstates:
         for j in alphabet:
-            #print("move con ",i," y etiqueta ",j)
+
             newList = (sorted(move(dictionary,final,i,j)))
             if newList not in Dstates and not newList == []:
                 Dstates.append(newList)           
