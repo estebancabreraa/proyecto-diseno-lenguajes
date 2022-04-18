@@ -19,9 +19,10 @@ def eCerradura(dictionary, finalNode, node):
                     else:
                         if values not in falseStates:
                             falseStates.append(values)
+        print(falseStates)
         return falseStates
 
-def move(dictionary,finalNode,states,label):
+def move(dictionary, finalNode,states,label):
     result=[]
     for i in states:
         if not i == finalNode:
