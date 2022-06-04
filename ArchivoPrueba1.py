@@ -2,7 +2,7 @@
 from AFDFixed.AFD import *
 
 
-exceptions = ['while','do','if','switch']
+exceptions = ['while','do','if','switch', 'IF', 'WHILE', 'While', 'for', 'FOR', 'For']
 adfArray = []
 id= 'id'
 temp = AFD(id)
@@ -15,10 +15,10 @@ temp.setTransition(tempidTransitions)
 adfArray.append(temp)
 numero= 'numero'
 temp = AFD(numero)
-tempnumeroAcceptance = {0: False, 1: True}
+tempnumeroAcceptance = {0: False, 1: False, 2: True}
 
 temp.setDictAcceptance(tempnumeroAcceptance)
-tempnumeroTransitions = {0: {1: [{48, 49}]}, 1: {1: [{48, 49}]}}
+tempnumeroTransitions = {0: {1: [{48, 49}]}, 1: {1: {48, 49}, 2: {64}}, 2: {}}
 
 temp.setTransition(tempnumeroTransitions)
 adfArray.append(temp)
@@ -28,8 +28,7 @@ previousName = ''
 previousAcceptance = ''
 found = False
 tokensFound = []
-#text = 'ho(la  10 123dsa2 sad as ads32 93r 2( sa0d ] &  + s  +  ==1 1 ?823?'
-f = open("tareas.txt", "r")
+f = open("ArchivoPrueba1Entrada.txt", "r")
 text = f.read()
 for i in text:
     temp = temp + i

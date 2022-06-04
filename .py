@@ -2,7 +2,7 @@
 from AFDFixed.AFD import *
 
 
-exceptions = ['while','do','if','switch']
+exceptions = ['while','do','if','switch', 'IF']
 adfArray = []
 temp = ''
 name = ""
@@ -10,8 +10,8 @@ previousName = ''
 previousAcceptance = ''
 found = False
 tokensFound = []
-#text = 'ho(la  10 123dsa2 sad as ads32 93r 2( sa0d ] &  + s  +  ==1 1 ?823?'
-f = open("tareas.txt", "r")
+
+f = open(".txt", "r")
 text = f.read()
 for i in text:
     temp = temp + i
@@ -39,6 +39,7 @@ for i in text:
                 if found:
                     break
 if acceptance:
+    print(acceptance)
     tokensFound.append((temp,name))
 for i in range(0, len(tokensFound)):
     temp = list(tokensFound[i])

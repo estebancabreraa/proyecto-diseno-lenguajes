@@ -1,0 +1,28 @@
+COMPILER SumList
+
+CHARACTERS
+
+digit    = "0123456789".
+
+TOKENS
+number = digit{digit}.
+decnumber = digit{digit}"."digit{digit}.
+
+PRODUCTIONS
+
+PrintSum =
+    (number | decnumber)
+    (.n = float(self.left_right[0]).)
+    {"," (number | decnumber)
+    Sumatoria<n>
+    }
+    (.print("La sumatoria de valores en la lista es: %s" %n) .)
+	.
+
+Sumatoria<acumulado> = 
+    (.lista = [acumulado, float(self.left_right[0])].)
+    (.suma = sum(lista).)
+    (.return suma .)
+    .
+
+END SumList

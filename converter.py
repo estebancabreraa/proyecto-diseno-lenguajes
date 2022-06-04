@@ -70,14 +70,22 @@ def addCharacters(data, charactersDict):
     keys = list(charactersDict.keys())
     values = list(charactersDict.values())
     for i in range (0,len(data)):
-        if type(data[i]) == str:
-            data[i] = values[keys.index(data[i])]
-        elif type(data[i]) == int:
-            temp = set()
-            temp.add(data[i])
-            data[i] = temp
-        elif type(data[i]) == list:
-            data[i] = listToSet(data[i])
+        if data[i] == 'digito ' or data[i] == ' digito ':
+            data[i] = 'digito'
+        if data[i] == 'letra ':
+            data[i] = 'letra'
+        if data[i] == 'enBlanco ' or data[i] == ' enBlanco ' or data[i] == ' enBlanco':
+            data[i] = 'letra'
+        if data[i] != ' ':
+
+            if type(data[i]) == str:
+                data[i] = values[keys.index(data[i])]
+            elif type(data[i]) == int:
+                temp = set()
+                temp.add(data[i])
+                data[i] = temp
+            elif type(data[i]) == list:
+                data[i] = listToSet(data[i])
     temp = set()
     for i in data:
         try:

@@ -52,7 +52,7 @@ if __name__ == "__main__":
     scanner = fileWritter(nameATG)
     scanner.writeImport('from AFDFixed.AFD import *')
     scanner.writeSentence('')
-    scanner.writeSentence("exceptions = ['while','do','if','switch']")
+    scanner.writeSentence("exceptions = ['while','do','if','switch', 'IF', 'WHILE', 'While', 'for', 'FOR', 'For']")
     adfArray = []
     scanner.writeSentence('adfArray = []')
     for i in tokensArray:
@@ -78,8 +78,8 @@ if __name__ == "__main__":
     scanner.writeSentence("previousAcceptance = ''")
     scanner.writeSentence("found = False")
     scanner.writeSentence("tokensFound = []")
-    scanner.writeSentence("#text = 'ho(la  10 123dsa2 sad as ads32 93r 2( sa0d ] &  + s  +  ==1 1 ?823?'")
-    scanner.writeSentence('f = open("tareas.txt", "r")')
+    #scanner.writeSentence("#text = 'ho(la  10 123dsa2 sad as ads32 93r 2( sa0d ] &  + s  +  ==1 1 ?823?'")
+    scanner.writeSentence('f = open(".txt", "r")')
     scanner.writeSentence('text = f.read()')
     scanner.writeFor('for i in text:')
     scanner.writeSentence('temp = temp + i')
